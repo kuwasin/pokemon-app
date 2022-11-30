@@ -2,9 +2,13 @@ nav {
   background-color: bisque;
   height: 65px;
   font-weight: 600;
-  font-size: 25px;
+
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   color: rgb(62, 65, 65);
+}
+
+nav h2 {
+  font-size: 25px;
 }

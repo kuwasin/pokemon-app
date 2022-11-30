@@ -1,7 +1,8 @@
 import React from 'react'
 import "./Card.css"
 
-function Card({pokemon}) {
+function Card({ pokemon }) {
+  // console.log(pokemon)
   return (
     <div className='card'>
       <div className="cardImg">
