@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+/* eslint-disable no-undef */
+import { createContext, useEffect, useRef, useState } from "react";
 import "./App.css";
 import Card from "./components/Card/Card";
 import Navbar from "./components/Navbar/Navbar";
 import { getAllPokemon, getPokemon } from "./utils/pokemon";
+//  export const MyContext = createContext(handleChange);
 function App() {
-  const initialURL = "https://pokeapi.co/api/v2/pokemon";
   const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState([]);
   const [nextURL, setNextURL] = useState("");
   const [prevURL, setPrevURL] = useState("");
   const [inputText, setInputText] = useState("");
   const [filteringPokemon, setFilteringPokemon] = useState([]);
+  const initialURL = "https://pokeapi.co/api/v2/pokemon";
+
   useEffect(() => {
     const fetchPokemonData = async () => {
       //全てのポケモンのデータを取得
@@ -25,7 +28,6 @@ function App() {
     fetchPokemonData();
   }, []);
   const loadPokemon = async (data) => {
-    console.log(data);
     let _pokemonData = await Promise.all(
       data.map((pokemon) => {
         // console.log(pokemon)
@@ -48,6 +50,11 @@ function App() {
     setNextURL(data.next);
     setPrevURL(data.previous);
     setLoading(false);
+    setFilteringPokemon(
+      pokemonData.filter((pokemon) => 
+      pokemon.name.toLowerCase().includes(inputText)
+      )
+    )
   };
   const handlePrevPage = async () => {
     if (!prevURL) return;
@@ -57,31 +64,32 @@ function App() {
     setNextURL(data.next);
     setPrevURL(data.previous);
     setLoading(false);
+     setFilteringPokemon(
+       pokemonData.filter((pokemon) =>
+         pokemon.name.toLowerCase().includes(inputText)
+       )
+     );
   };
   //ポケモンの検索
   const handleChange = (e) => {
     setInputText(e.target.value);
-    console.log(inputText);
-    searchPokemon(inputText);
-  };
-  const searchPokemon = () => {
     setFilteringPokemon(
       pokemonData.filter((pokemon) =>
-        pokemon.name.toLowerCase().includes(inputText)
+        pokemon.name.toLowerCase().includes(inputText.toLowerCase())
       )
     );
-    console.log(filteringPokemon);
   };
+
   return (
     <div className="App">
       {loading ? (
         <h1>ロード中…</h1>
       ) : (
-        <>
-          <Navbar handleChange={handleChange} value={inputText} />
-
+          <>
+            {/* {console.log(filteringPokemon)} */}
+          <Navbar handleChange={handleChange} />
           <div className="pokemonCardContainer">
-            {filteringPokemon.length === 0
+            {(filteringPokemon.length === 0) | (inputText.length === 0)
               ? pokemonData.map((pokemon, i) => {
                   return <Card key={i} pokemon={pokemon} />;
                 })

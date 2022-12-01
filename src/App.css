@@ -4,7 +4,9 @@
   height: 100vh;
 
 }
-
+.App h1 {
+  margin-top: auto;
+}
 .pokemonCardContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
