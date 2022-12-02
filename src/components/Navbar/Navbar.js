@@ -1,7 +1,7 @@
 import React from 'react'
 import Search from '../Search/Search';
 import "./Navbar.css"
-function Navbar({handleChange,value}) {
+function Navbar({handleChange}) {
  
   
   
@@ -10,7 +10,7 @@ function Navbar({handleChange,value}) {
   return (
     <nav>
       <h2>ポケモン図鑑</h2>
-      <Search handleChange={handleChange} value = {value} />
+      <Search handleChange={handleChange} />
     </nav>
   );
 }

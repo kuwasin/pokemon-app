@@ -1,14 +1,9 @@
-import React from 'react'
+import React from "react";
 
-function Search({ handleChange, value }) {
+function Search({ handleChange }) {
   return (
-    <input
-      type="text"
-      placeholder="ポケモンを探す"
-      onChange={handleChange}
-      value={value}
-    />
+    <input type="text" placeholder="ポケモンを探す" onChange={handleChange} />
   );
 }
 
-export default Search
+export default Search;
