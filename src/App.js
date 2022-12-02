@@ -86,7 +86,6 @@ function App() {
         <h1>ロード中…</h1>
       ) : (
           <>
-            {/* {console.log(filteringPokemon)} */}
           <Navbar handleChange={handleChange} />
           <div className="pokemonCardContainer">
             {(filteringPokemon.length === 0) | (inputText.length === 0)
